@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MatchPulse | Intelligent Resume–Job Matching & ATS Optimization System</title>
+    <meta name="description" content="AI-powered hybrid Resume-Job matching engine with semantic vector analysis, skill gap matrix, ATS score grading, and multi-candidate ranking.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="dark-theme">
+    <!-- Floating Glowing Crimson Embers -->
+    <div class="dragon-particles" id="dragonParticles">
+        <span class="ember" style="left: 10%; --dur: 7s; --delay: 0s; --drift: 30px; --max-op: 0.8; width: 4px; height: 4px;"></span>
+        <span class="ember" style="left: 22%; --dur: 11s; --delay: 2s; --drift: -40px; --max-op: 0.6; width: 3px; height: 3px;"></span>
+        <span class="ember" style="left: 35%; --dur: 9s; --delay: 4s; --drift: 50px; --max-op: 0.7; width: 5px; height: 5px;"></span>
+        <span class="ember" style="left: 48%; --dur: 8s; --delay: 1s; --drift: -25px; --max-op: 0.9; width: 3px; height: 3px;"></span>
+        <span class="ember" style="left: 62%; --dur: 12s; --delay: 3s; --drift: 45px; --max-op: 0.75; width: 4px; height: 4px;"></span>
+        <span class="ember" style="left: 75%; --dur: 10s; --delay: 5s; --drift: -35px; --max-op: 0.8; width: 5px; height: 5px;"></span>
+        <span class="ember" style="left: 88%; --dur: 8.5s; --delay: 2.5s; --drift: 25px; --max-op: 0.65; width: 3px; height: 3px;"></span>
+        <span class="ember" style="left: 95%; --dur: 10.5s; --delay: 0.5s; --drift: -20px; --max-op: 0.7; width: 4px; height: 4px;"></span>
+    </div>
+
+    <!-- Ambient Crimson Energy Rays & Smoke -->
+    <div class="ambient-rays"></div>
+    <div class="dragon-smoke"></div>
+
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo-area">
+                <div class="logo-icon-wrapper">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    <span class="pulse-indicator"></span>
+                </div>
+                <div class="logo-text">
+                    <h1>MATCH<span class="crimson-accent">PULSE</span></h1>
+                    <div class="chip header-chip">
+                        <span class="dot"></span>
+                        <span>TACTICAL AI SYSTEM</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Navigation Tabs -->
+            <nav class="nav-tabs" id="mainNav">
+                <button class="nav-tab active" data-tab="studio" id="navStudio">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                    <span>Match Studio</span>
+                </button>
+                <button class="nav-tab" data-tab="analytics" id="navAnalytics" disabled>
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                    <span>Match Analytics</span>
+                    <span class="score-pill-nav" id="navScorePill" style="display: none;">--%</span>
+                </button>
+                <button class="nav-tab" data-tab="optimizer" id="navOptimizer" disabled>
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                    <span>ATS Optimizer</span>
+                </button>
+                <button class="nav-tab" data-tab="batch" id="navBatch">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    <span>Batch Ranker</span>
+                </button>
+            </nav>
+
+            <div class="header-actions">
+                <button class="ghost-btn" id="btnExploreTaxonomy" title="View 1,200+ skill taxonomy">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                    <span>Taxonomy</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="app-main">
+        <!-- ================= TAB 1: MATCH STUDIO ================= -->
+        <section class="tab-panel active" id="tabStudio">
+            <div class="panel-hero">
+                <div class="hero-badge">Hybrid NLP & Semantic Vector Matching</div>
+                <h2>Pair Candidate Resumes with Job Descriptions</h2>
+                <p>Upload documents (PDF, DOCX, TXT) or paste text. Our dual-engine extracts structured skills, computes Latent Semantic Analysis vectors, and highlights critical qualification gaps instantly.</p>
+            </div>
+
+            <!-- Quick Sample Loaders -->
+            <div class="sample-bar">
+                <span class="sample-label">⚡ Quick Presets:</span>
+                <div class="sample-chips" id="samplePresetsContainer">
+                    <button class="sample-chip" data-sample-pair="fullstack">
+                        <span>Senior Full-Stack (Alex vs CloudScale)</span>
+                    </button>
+                    <button class="sample-chip" data-sample-pair="aiml">
+                        <span>AI / ML Engineer (Elena vs DeepCognition)</span>
+                    </button>
+                    <button class="sample-chip" data-sample-pair="gap">
+                        <span>Junior Web Dev vs Senior Role (Gap Demo)</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dual Input Studio Grid -->
+            <div class="dual-input-grid">
+                <!-- LEFT CARD: RESUME INPUT -->
+                <div class="input-card" id="cardResume">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <span class="step-num">1</span>
+                            <div>
+                                <h3>Candidate Resume</h3>
+                                <p>Upload file or paste formatted resume</p>
+                            </div>
+                        </div>
+                        <div class="mode-toggles">
+                            <button class="mode-btn active" data-target="resume" data-mode="upload" id="resumeModeUpload">Upload File</button>
+                            <button class="mode-btn" data-target="resume" data-mode="paste" id="resumeModePaste">Paste Text</button>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <!-- Resume File Upload Dropzone -->
+                        <div class="dropzone" id="resumeDropzone">
+                            <input type="file" id="resumeFileInput" accept=".pdf,.docx,.txt" class="file-input-hidden">
+                            <div class="dropzone-content">
+                                <div class="dropzone-icon">
+                                    <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                                </div>
+                                <h4>Drop Resume Here or <span class="browse-link">Browse</span></h4>
+                                <p class="dropzone-hint">Supports PDF, DOCX, TXT (up to 15MB)</p>
+                            </div>
+                            <div class="file-preview-pill" id="resumeFilePill" style="display: none;">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                <span class="file-name" id="resumeFileName">resume.pdf</span>
+                                <button type="button" class="remove-file-btn" id="btnRemoveResumeFile" title="Remove file">&times;</button>
+                            </div>
+                        </div>
+
+                        <!-- Resume Text Area (Initially Hidden) -->
+                        <div class="paste-zone" id="resumePasteZone" style="display: none;">
+                            <textarea id="resumeTextArea" placeholder="Paste full resume text here including summary, work experience, technical skills, and education..."></textarea>
+                            <div class="textarea-footer">
+                                <span class="char-count" id="resumeCharCount">0 characters</span>
+                                <button type="button" class="clear-btn" id="btnClearResumeText">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT CARD: JOB DESCRIPTION INPUT -->
+                <div class="input-card" id="cardJob">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <span class="step-num">2</span>
+                            <div>
+                                <h3>Target Job Description</h3>
+                                <p>Upload job posting or paste requirements</p>
+                            </div>
+                        </div>
+                        <div class="mode-toggles">
+                            <button class="mode-btn active" data-target="job" data-mode="upload" id="jobModeUpload">Upload File</button>
+                            <button class="mode-btn" data-target="job" data-mode="paste" id="jobModePaste">Paste Text</button>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <!-- Job Title Input -->
+                        <div class="form-field-wrapper">
+                            <label for="jobTitleInput">Role Title (Optional)</label>
+                            <input type="text" id="jobTitleInput" placeholder="e.g. Senior Full-Stack Engineer" class="text-input">
+                        </div>
+
+                        <!-- Job Dropzone -->
+                        <div class="dropzone" id="jobDropzone">
+                            <input type="file" id="jobFileInput" accept=".pdf,.docx,.txt" class="file-input-hidden">
+                            <div class="dropzone-content">
+                                <div class="dropzone-icon">
+                                    <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                                </div>
+                                <h4>Drop Job Description or <span class="browse-link">Browse</span></h4>
+                                <p class="dropzone-hint">Supports PDF, DOCX, TXT</p>
+                            </div>
+                            <div class="file-preview-pill" id="jobFilePill" style="display: none;">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                                <span class="file-name" id="jobFileName">job_spec.pdf</span>
+                                <button type="button" class="remove-file-btn" id="btnRemoveJobFile" title="Remove file">&times;</button>
+                            </div>
+                        </div>
+
+                        <!-- Job Text Area (Initially Hidden) -->
+                        <div class="paste-zone" id="jobPasteZone" style="display: none;">
+                            <textarea id="jobTextArea" placeholder="Paste job description, responsibilities, required qualifications, and tech stack here..."></textarea>
+                            <div class="textarea-footer">
+                                <span class="char-count" id="jobCharCount">0 characters</span>
+                                <button type="button" class="clear-btn" id="btnClearJobText">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Central Action Banner -->
+            <div class="action-dock">
+                <button class="primary-action-btn" id="btnRunMatch">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    <span>Run Intelligent Match Analysis</span>
+                    <span class="btn-shine"></span>
+                </button>
+                <p class="dock-hint">Powered by Sublinear TF-IDF, LSA dense concept projection, & 1,200+ skill taxonomy</p>
+            </div>
+        </section>
+
+        <!-- ================= TAB 2: MATCH ANALYTICS ================= -->
+        <section class="tab-panel" id="tabAnalytics">
+            <!-- Score Header & Verdict -->
+            <div class="analytics-hero-card">
+                <div class="score-radial-container">
+                    <svg class="radial-svg" viewBox="0 0 160 160">
+                        <circle class="radial-bg" cx="80" cy="80" r="68"></circle>
+                        <circle class="radial-progress" id="radialProgressBar" cx="80" cy="80" r="68" stroke-dasharray="427.26" stroke-dashoffset="427.26"></circle>
+                    </svg>
+                    <div class="radial-content">
+                        <span class="radial-score-num" id="heroScoreDisplay">0.0</span>
+                        <span class="radial-score-symbol">%</span>
+                        <span class="radial-score-sub">COMPOSITE FIT</span>
+                    </div>
+                </div>
+
+                <div class="verdict-container">
+                    <div class="verdict-header-row">
+                        <span class="tier-pill" id="heroTierPill">Calculating...</span>
+                        <span class="candidate-meta-tag" id="heroCandidateMeta">Candidate Name</span>
+                    </div>
+                    <h3 class="verdict-headline" id="heroVerdictHeadline">Executive Assessment</h3>
+                    <p class="verdict-paragraph" id="heroVerdictText">Detailed narrative breakdown of candidate-job fit will appear here.</p>
+                    
+                    <div class="candidate-quick-badges">
+                        <div class="meta-stat">
+                            <span class="meta-stat-label">Experience</span>
+                            <span class="meta-stat-val" id="metaExpYears">-- yrs</span>
+                        </div>
+                        <div class="meta-stat">
+                            <span class="meta-stat-label">Seniority</span>
+                            <span class="meta-stat-val" id="metaSeniority">--</span>
+                        </div>
+                        <div class="meta-stat">
+                            <span class="meta-stat-label">Education</span>
+                            <span class="meta-stat-val" id="metaEducation">--</span>
+                        </div>
+                        <div class="meta-stat">
+                            <span class="meta-stat-label">Skills Found</span>
+                            <span class="meta-stat-val" id="metaSkillsFound">--</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5-Dimensional Breakdown Cards -->
+            <div class="dimensions-grid">
+                <div class="dim-card" id="dimSkills">
+                    <div class="dim-header">
+                        <div class="dim-title-group">
+                            <span class="dim-icon">🛠️</span>
+                            <h4>Skills Overlap</h4>
+                        </div>
+                        <span class="dim-weight">Weight: 45%</span>
+                    </div>
+                    <div class="dim-score-row">
+                        <span class="dim-score-val" id="scoreSkills">0%</span>
+                        <div class="dim-progress-track">
+                            <div class="dim-progress-fill" id="fillSkills" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <p class="dim-detail" id="detailSkills">-- skills matched out of -- required</p>
+                </div>
+
+                <div class="dim-card" id="dimSemantic">
+                    <div class="dim-header">
+                        <div class="dim-title-group">
+                            <span class="dim-icon">🧠</span>
+                            <h4>Semantic Alignment</h4>
+                        </div>
+                        <span class="dim-weight">Weight: 30%</span>
+                    </div>
+                    <div class="dim-score-row">
+                        <span class="dim-score-val" id="scoreSemantic">0%</span>
+                        <div class="dim-progress-track">
+                            <div class="dim-progress-fill" id="fillSemantic" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <p class="dim-detail" id="detailSemantic">Latent Semantic SVD Concept Similarity</p>
+                </div>
+
+                <div class="dim-card" id="dimExp">
+                    <div class="dim-header">
+                        <div class="dim-title-group">
+                            <span class="dim-icon">⏳</span>
+                            <h4>Experience Fit</h4>
+                        </div>
+                        <span class="dim-weight">Weight: 12%</span>
+                    </div>
+                    <div class="dim-score-row">
+                        <span class="dim-score-val" id="scoreExp">0%</span>
+                        <div class="dim-progress-track">
+                            <div class="dim-progress-fill" id="fillExp" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <p class="dim-detail" id="detailExp">Duration requirement comparison</p>
+                </div>
+
+                <div class="dim-card" id="dimSeniority">
+                    <div class="dim-header">
+                        <div class="dim-title-group">
+                            <span class="dim-icon">👔</span>
+                            <h4>Seniority Level</h4>
+                        </div>
+                        <span class="dim-weight">Weight: 8%</span>
+                    </div>
+                    <div class="dim-score-row">
+                        <span class="dim-score-val" id="scoreSeniority">0%</span>
+                        <div class="dim-progress-track">
+                            <div class="dim-progress-fill" id="fillSeniority" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <p class="dim-detail" id="detailSeniority">Role seniority comparison</p>
+                </div>
+
+                <div class="dim-card" id="dimEdu">
+                    <div class="dim-header">
+                        <div class="dim-title-group">
+                            <span class="dim-icon">🎓</span>
+                            <h4>Education Degree</h4>
+                        </div>
+                        <span class="dim-weight">Weight: 5%</span>
+                    </div>
+                    <div class="dim-score-row">
+                        <span class="dim-score-val" id="scoreEdu">0%</span>
+                        <div class="dim-progress-track">
+                            <div class="dim-progress-fill" id="fillEdu" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <p class="dim-detail" id="detailEdu">Academic qualification match</p>
+                </div>
+            </div>
+
+            <!-- Deep Dive Skills Matrix -->
+            <div class="analytics-card">
+                <div class="skills-matrix-header">
+                    <div class="matrix-title">
+                        <h3>Interactive Skills Intelligence Matrix</h3>
+                        <p>Granular classification of candidate capabilities against job specifications</p>
+                    </div>
+
+                    <div class="matrix-filter-pills">
+                        <button class="filter-pill active" data-filter="all" id="filterSkillsAll">
+                            All Skills (<span id="countSkillsAll">0</span>)
+                        </button>
+                        <button class="filter-pill" data-filter="matched" id="filterSkillsMatched">
+                            <span class="dot dot-green"></span> Matched (<span id="countSkillsMatched">0</span>)
+                        </button>
+                        <button class="filter-pill" data-filter="missing" id="filterSkillsMissing">
+                            <span class="dot dot-amber"></span> Missing / Gaps (<span id="countSkillsMissing">0</span>)
+                        </button>
+                        <button class="filter-pill" data-filter="bonus" id="filterSkillsBonus">
+                            <span class="dot dot-blue"></span> Bonus Skills (<span id="countSkillsBonus">0</span>)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Skills Badges Grid -->
+                <div class="skills-badge-wall" id="skillsBadgeWall">
+                    <!-- Populated dynamically by JavaScript -->
+                </div>
+
+                <!-- Domain Category Breakdown Bar Charts -->
+                <div class="domain-stats-section">
+                    <h4>Technical Domain Fulfillment</h4>
+                    <div class="domain-bars-container" id="domainBarsContainer">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TAB 3: ATS OPTIMIZER ================= -->
+        <section class="tab-panel" id="tabOptimizer">
+            <div class="panel-hero">
+                <div class="hero-badge">Applicant Tracking System (ATS) Intelligence</div>
+                <h2>Resume Gap Optimization & Tailoring Studio</h2>
+                <p>Actionable guidance, high-impact missing keyword suggestions, and custom accomplishment bullet points to maximize scan rate and candidate interview callbacks.</p>
+            </div>
+
+            <div class="optimizer-grid">
+                <!-- Left: ATS Health Checklist -->
+                <div class="optimizer-card">
+                    <div class="opt-card-header">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        <h3>ATS Formatting & Health Checklist</h3>
+                    </div>
+                    <div class="checklist-items" id="atsChecklistItems">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Right: Tailored Bullet Point Generator -->
+                <div class="optimizer-card">
+                    <div class="opt-card-header">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="m4.93 4.93 4.24 4.24"></path><path d="m14.83 9.17 4.24-4.24"></path><path d="m14.83 14.83 4.24 4.24"></path><path d="m9.17 14.83-4.24 4.24"></path><circle cx="12" cy="12" r="4"></circle></svg>
+                        <h3>Suggested Tailored Bullet Points</h3>
+                    </div>
+                    <p class="opt-sub">Ready-to-use accomplishment bullets targeting your critical missing keywords:</p>
+                    <div class="bullet-suggestions-list" id="bulletSuggestionsList">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actionable Recommendations Stream -->
+            <div class="recommendations-container" id="recommendationsContainer">
+                <!-- Populated dynamically -->
+            </div>
+        </section>
+
+        <!-- ================= TAB 4: BATCH APPLICANT RANKER ================= -->
+        <section class="tab-panel" id="tabBatch">
+            <div class="panel-hero">
+                <div class="hero-badge">High-Volume Hiring & Recruitment</div>
+                <h2>Batch Applicant Ranking Engine</h2>
+                <p>Upload a cohort of candidate resumes (PDF, DOCX, TXT) against a single job description to generate an instantaneous, sorted candidate leaderboard.</p>
+            </div>
+
+            <div class="batch-setup-grid">
+                <!-- Batch Job Description Card -->
+                <div class="batch-card">
+                    <div class="batch-card-header">
+                        <span class="step-num">A</span>
+                        <h3>Job Specification</h3>
+                    </div>
+                    <div class="form-field-wrapper">
+                        <label for="batchJobTitle">Role Title</label>
+                        <input type="text" id="batchJobTitle" placeholder="e.g. Senior Full-Stack Engineer" class="text-input" value="Senior Full-Stack Engineer">
+                    </div>
+                    <div class="form-field-wrapper">
+                        <label for="batchJobText">Job Description Requirements</label>
+                        <textarea id="batchJobText" rows="6" placeholder="Paste the job description here..."></textarea>
+                    </div>
+                    <button class="ghost-btn-small" id="btnLoadBatchDefaultJob">Load Default CloudScale Job</button>
+                </div>
+
+                <!-- Batch Resumes Upload Card -->
+                <div class="batch-card">
+                    <div class="batch-card-header">
+                        <span class="step-num">B</span>
+                        <h3>Upload Cohort Resumes</h3>
+                    </div>
+                    <div class="dropzone" id="batchDropzone">
+                        <input type="file" id="batchFilesInput" accept=".pdf,.docx,.txt" multiple class="file-input-hidden">
+                        <div class="dropzone-content">
+                            <div class="dropzone-icon">
+                                <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </div>
+                            <h4>Select Multiple Resumes or Drop Them Here</h4>
+                            <p class="dropzone-hint">Upload 2 to 50 resumes simultaneously (.pdf, .docx, .txt)</p>
+                        </div>
+                    </div>
+                    <div class="batch-file-summary" id="batchFileSummary" style="display: none;">
+                        <span id="batchFileCountLabel">0 files staged</span>
+                        <button class="clear-btn" id="btnClearBatchFiles">Clear All</button>
+                    </div>
+                    <div class="batch-demo-loader">
+                        <span>Or test immediately:</span>
+                        <button class="secondary-btn-small" id="btnLoadSampleCohort">Load 3 Sample Resumes</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Run Batch Button -->
+            <div class="action-dock">
+                <button class="primary-action-btn" id="btnRunBatch">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><polyline points="16 11 18 13 22 9"></polyline></svg>
+                    <span>Analyze & Rank Candidate Cohort</span>
+                    <span class="btn-shine"></span>
+                </button>
+            </div>
+
+            <!-- Leaderboard Results Container -->
+            <div class="leaderboard-section" id="batchLeaderboardSection" style="display: none;">
+                <div class="leaderboard-header">
+                    <div>
+                        <h3>Candidate Leaderboard</h3>
+                        <p id="leaderboardSubtitle">Ranked by Composite AI Fit Score</p>
+                    </div>
+                    <div class="leaderboard-actions">
+                        <button class="export-btn" id="btnExportCSV">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            <span>Export CSV</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="leaderboard-table-wrapper">
+                    <table class="leaderboard-table" id="leaderboardTable">
+                        <thead>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Candidate</th>
+                                <th>Fit Score</th>
+                                <th>Tier</th>
+                                <th>Experience</th>
+                                <th>Matched Skills</th>
+                                <th>Missing Gaps</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboardTbody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal: Taxonomy Explorer -->
+    <div class="modal-backdrop" id="modalTaxonomy" style="display: none;">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div>
+                    <h3>Skills & Domain Taxonomy</h3>
+                    <p>Over 1,200 indexed skills across engineering, cloud, AI, databases, and methodologies.</p>
+                </div>
+                <button class="modal-close" id="btnCloseTaxonomy">&times;</button>
+            </div>
+            <div class="modal-search">
+                <input type="text" id="taxonomySearchInput" placeholder="Filter skills (e.g. Python, Docker, PyTorch)..." class="text-input">
+            </div>
+            <div class="modal-body" id="taxonomyModalBody">
+                <!-- Populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
